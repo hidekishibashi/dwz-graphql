@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  db:
+    platform: linux/x86_64
+    image: mysql:8.0.21
+    container_name: dwz_db
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: dwz
+      MYSQL_ROOT_HOST: '%'
+      TZ: "Asia/Tokyo"
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+
+  web:
+    build: .
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - .:/dwz
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    #TODO: Ruby3.1で導入された`debug`にも必要な設定なのかな？確認する
+    tty: true
+    stdin_open: true
+
+volumes:
+  db-data:
