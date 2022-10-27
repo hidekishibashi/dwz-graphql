@@ -1,24 +1,29 @@
-# README
+# DWZ GraphQL on Rails
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Versions
 
-Things you may want to cover:
+| name  | version |
+|:------|:-------:|
+| Ruby  | 3.1.2   |
+| Rails | 7.0.4   | 
+| mysql | 8.0.21  |
 
-* Ruby version
+## How to Start
 
-* System dependencies
+#### Build Docker
 
-* Configuration
+```
+docker compose build
+```
 
-* Database creation
+#### Create Database
 
-* Database initialization
+```
+docker compose rub web rails db:create
+```
 
-* How to run the test suite
+#### Start Rails Application
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+```
+docker compose up
+```
